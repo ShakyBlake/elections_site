@@ -1,11 +1,23 @@
-const express = require('express');
+const express = require("express");
+const path = require("path");
+
 const app = express();
 
-app.use(express.static('public'));
- 
-app.get('/', (req, res) => {
-    res.render('index.ejs');
-  });
+// Set the 'views' directory
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs"); // Tells Express to use EJS as the templating engine
 
- 
-app.listen(3000);
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+
+
+// Define the route to render the index.ejs file
+app.get("/", (req, res) => {
+    res.render("index");
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
