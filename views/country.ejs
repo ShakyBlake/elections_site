@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Hub - <%= country.name %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Back to Home Button -->
+    <div class="back-to-home">
+        <a href="/" class="back-home-btn">Back to Home</a>
+    </div>
+    <div class="country-page">
+        <h1><%= country.name %></h1>
+        <img src="/images/<%= country.image %>" alt="<%= country.name %> Map">
+        <a href="/countries">Back to Countries</a>
+    </div>
+</body>
+</html>
