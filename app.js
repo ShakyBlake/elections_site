@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-
 const app = express();
 
 // Set the 'views' directory
@@ -11,17 +10,10 @@ app.set("view engine", "ejs"); // Tells Express to use EJS as the templating eng
 app.use(express.static('public'));
 
 const countries = [
-    { name: "USA", code: "US", image: "US.png" },
-    { name: "Australia", code: "AU", image: "AU.png" },
-    { name: "New Zealand", code: "NZ", image: "NZ.png" },
-    { name: "Italy", code: "IT", image: "Italy.png" },
-];
-
-const countryflag = [
-    { name: "USAflag", code: "USflag", image: "USflag.png" },
-    { name: "Australiaflag", code: "AUflag", image: "AUflag.png" },
-    { name: "New Zealandflag", code: "NZflag", image: "NZflag.png" },
-    { name: "Italyflag", code: "ITflag", image: "ITflag.png" },
+    { name: "USA", code: "US", image: "US.png", flag: "USflag.png" },
+    { name: "Australia", code: "AU", image: "AU.png", flag: "AUflag.png" },
+    { name: "New Zealand", code: "NZ", image: "NZ.png", flag: "NZflag.png" },
+    { name: "Italy", code: "IT", image: "Italy.png", flag: "ITflag.png" },
 ];
 
 // Define the route to render the index.ejs file
@@ -56,7 +48,12 @@ app.get("/news", (req, res) => {
 
 // Route to render the countries page
 app.get("/countries", (req, res) => {
-    res.render("countries", { countries, countryflag }); // Pass both arrays
+    let countryList = "";
+    countries.forEach(country => {
+        countryList += `${country.name}, `;
+    });
+    console.log("Available countries:", countryList); // Debugging output
+    res.render("countries", { countries});
 });
 
 // Route to render individual country pages dynamically
@@ -72,8 +69,17 @@ app.get("/countries/:countryCode", (req, res) => {
 app.use(express.urlencoded({ extended: true })); // Middleware to parse form data
 
 app.post("/submit", (req, res) => {
-    const { name } = req.body;
-    res.render("submit", { name: name || "Guest" }); // Fallback if name is empty
+    let { name } = req.body;
+
+    // Trim whitespace
+    name = name.trim();
+
+    // Check if name is empty or contains invalid characters
+    if (!name || !/^[A-Za-z\s]+$/.test(name)) {
+        return res.render("submit", { name: null, error: "Invalid input. Use only letters." });
+    }
+
+    res.render("submit", { name, error: null });
 });
 
 app.get("/submit", (req, res) => {
