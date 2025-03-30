@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+
 const app = express();
 const countries = [
     { name: "USA", code: "US", image: "US.png", flag: "USflag.png" },
@@ -47,12 +48,12 @@ app.get("/news", (req, res) => {
 
 // Route to render the countries page
 app.get("/countries", (req, res) => {
-    let countryList = "";
-    countries.forEach(country => {
-        countryList += `${country.name}, `;
-    });
-    console.log("Available countries:", countryList); // Debugging output
-    res.render("countries", { countries});
+    let countryList = [];
+    for (let i = 0; i < countries.length; i++) {
+        countryList.push(countries[i].name);
+    }
+    console.log("Available countries:", countryList.join(", ")); // Debugging output
+    res.render("countries", { countries });
 });
 
 // Route to render individual country pages dynamically

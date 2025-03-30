@@ -1,10 +1,10 @@
-Instructions
-Setup
+## Instructions
+## Setup
 If you get a script error in PowerShell then run:
 
 Set-ExecutionPolicy Unrestricted
 
-Run each of the following in turn:
+## Run each of the following in turn:
 
 npm init -y
 
@@ -14,5 +14,5 @@ npm install ejs
 
 npm install express-ejs-layouts
 
-How to run
-node app.js
+## How to run
+In terminal enter - node app.js
