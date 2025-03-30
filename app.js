@@ -1,6 +1,12 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const countries = [
+    { name: "USA", code: "US", image: "US.png", flag: "USflag.png" },
+    { name: "Australia", code: "AU", image: "AU.png", flag: "AUflag.png" },
+    { name: "New Zealand", code: "NZ", image: "NZ.png", flag: "NZflag.png" },
+    { name: "Italy", code: "IT", image: "Italy.png", flag: "ITflag.png" },
+];
 
 // Set the 'views' directory
 app.set("views", path.join(__dirname, "views"));
@@ -8,13 +14,6 @@ app.set("view engine", "ejs"); // Tells Express to use EJS as the templating eng
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
-
-const countries = [
-    { name: "USA", code: "US", image: "US.png", flag: "USflag.png" },
-    { name: "Australia", code: "AU", image: "AU.png", flag: "AUflag.png" },
-    { name: "New Zealand", code: "NZ", image: "NZ.png", flag: "NZflag.png" },
-    { name: "Italy", code: "IT", image: "Italy.png", flag: "ITflag.png" },
-];
 
 // Define the route to render the index.ejs file
 app.get("/", (req, res) => {
