@@ -6,13 +6,13 @@ Set-ExecutionPolicy Unrestricted
 
 ## Run each of the following in turn:
 
-npm init -y
+*npm init -y*
 
-npm install express
+*npm install express*
 
-npm install ejs
+*npm install ejs*
 
-npm install express-ejs-layouts
+*npm install express-ejs-layouts*
 
 ## How to run
 In terminal enter - node app.js

@@ -46,6 +46,10 @@ app.get("/news", (req, res) => {
     res.render("news", { newsArticles });
 });
 
+app.get("/nocountry", (req, res) => {
+    res.render("nocountry");
+})
+
 // Route to render the countries page
 app.get("/countries", (req, res) => {
     let countryList = [];
@@ -58,10 +62,13 @@ app.get("/countries", (req, res) => {
 
 // Route to render individual country pages dynamically
 app.get("/countries/:countryCode", (req, res) => {
-    const country = countries.find(c => c.code === req.params.countryCode);
+    const countryCode = req.params.countryCode.toUpperCase(); // Make case-insensitive
+    const country = countries.find(c => c.code === countryCode);
+
     if (!country) {
-        return res.status(404).send("Country not found");
+        return res.redirect("/nocountry");
     }
+
     res.render("country", { country });
 });
 
