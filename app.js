@@ -29,13 +29,13 @@ app.get("/contact", (req, res) => {
 // Render news page and all articles
 const newsArticles = [
     {
-        title: "News Headline 1",
+        title: "'The left is making it better' says left wing reporter",
         date: "March 17, 2025",
         summary: "Summary of the news article. Click below to read more.",
         link: "#"
     },
     {
-        title: "News Headline 2",
+        title: "'The left is making it worse' says right wing reporter",
         date: "March 17, 2025",
         summary: "Summary of another news article. Click below to read more.",
         link: "#"
@@ -79,7 +79,7 @@ app.post("/submit", (req, res) => {
     let { name } = req.body;
 
     // Trim whitespace
-    name = name.trim();
+    name=name.trim();
 
     // Check if name is empty or contains invalid characters
     if (!name || !/^[A-Za-z\s]+$/.test(name)) {
@@ -91,6 +91,10 @@ app.post("/submit", (req, res) => {
 
 app.get("/submit", (req, res) => {
     res.render("submit", { name: "Guest" }); // Default value if accessed directly
+});
+
+app.get("/map", (req, res) => {
+    res.render("map");
 });
 
 // Start the server
